@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+lib
+coverage
+doc
+*.un~
+pids
+*.pid
+*.seed
+*.pid.lock
