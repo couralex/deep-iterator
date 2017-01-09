@@ -21,7 +21,7 @@ npm install deep-iterator
 
 ```js
 import deepIterator from 'deep-iterator';
-// commonJS : var deep-iterator = require(deep-iterator).default;
+// commonJS : var deepIterator = require('deep-iterator').default;
 
 const obj = {a: 1, b: [2, 3]};
 for (let {value} of deepIterator(obj)) {
