@@ -3,10 +3,13 @@
   "version": "1.0.2",
   "description": "Deep iteration of any object or iterable collection.",
   "main": "./lib/deep-iterator.js",
+  "jsnext:main": "src/index.js",
+  "module": "es/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "transpile": "babel --source-maps inline src --out-dir lib",
     "build": "npm run clean && npm run transpile",
+    "prepublish": "npm run build",
     "commit": "git-cz",
     "commita": "git add . && git status -s && git-cz",
     "lint": "eslint src test",
