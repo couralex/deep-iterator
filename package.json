@@ -1,6 +1,6 @@
 {
   "name": "deep-iterator",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Deep iteration of any object or iterable collection.",
   "main": "./lib/deep-iterator.js",
   "scripts": {
