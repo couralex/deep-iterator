@@ -1,23 +1,29 @@
 import * as gen from './generators';
 
+const LEAF = null;
+
 const tagMap = {
-  '[object Null]': null,
-  '[object Undefined]': null,
+  '[object Null]': LEAF,
+  '[object Undefined]': LEAF,
+  '[object Boolean]': LEAF,
+  '[object Number]': LEAF,
+  '[object String]': LEAF, // strings are excluded although they are iterable
+  '[object Symbol]': LEAF,
+  '[object Date]': LEAF,
+  '[object RegExp]': LEAF,
+  '[object Function]': LEAF,
+  '[object GeneratorFunction]': LEAF,
+  '[object Promise]': LEAF,
   '[object Array]': gen.arrayIterator,
-  '[object String]': null, // strings are excluded although they are iterable
-  '[object Date]': null,
-  '[object Number]': null,
-  '[object RegExp]': null,
-  '[object Function]': null,
   '[object Map]': gen.mapIterator
 };
 
 export default function makeSelectGenerator(config) {
   const skipIteration = config.skipIteration;
-  const objectIterator = config.iterateOverObject ? gen.objectIterator : null;
+  const objectIterator = config.iterateOverObject ? gen.objectIterator : LEAF;
   return node => {
     if (skipIteration(node)) {
-      return null;
+      return LEAF;
     }
     const stringTag = Object.prototype.toString.call(node.value);
     if (stringTag in tagMap) {

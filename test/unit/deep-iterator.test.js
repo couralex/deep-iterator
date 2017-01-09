@@ -92,13 +92,21 @@ describe('deepIterator', function() {
       });
     });
   });
-  describe('options: {onlyLeaves: false}', function() {
+  describe('options: {onlyLeaves: true}', function() {
     it('should iterate leaves only', function () {
+      const testee = [[1, 2], {a: 3, b: 4}];
+      const result = deepIteratorResultValues(testee, {onlyLeaves: true});
+      const expected = [1 ,2, 3, 4];
+      expect(result).to.deep.equal(expected);
     });
-    const testee = [[1, 2], {a: 3, b: 4}];
-    const result = deepIteratorResultValues(testee, {onlyLeaves: true});
-    const expected = [1 ,2, 3, 4];
-    expect(result).to.deep.equal(expected);
+    it('should yield non iterable built-in types', function () {
+      const foo = () => {};
+      const promise = new Promise(foo);
+      const testee = [1, null, undefined, true, new Date(1995, 10), /a/, foo, promise];
+      const result = deepIteratorResultValues(testee, {onlyLeaves: true});
+      const expected = [1, null, undefined, true, new Date(1995, 10), /a/, foo, promise];
+      expect(result).to.deep.equal(expected);
+    });
   });
   describe('options: {iterateOverObject: false}', function() {
     it('should not iterate object', function () {
