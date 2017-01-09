@@ -20,11 +20,11 @@ npm install deep-iterator
 ## Usage
 
 ```js
-import deepIterator from './src/deep-iterator';
+import deepIterator from 'deep-iterator';
 // commonJS : var deep-iterator = require(deep-iterator).default;
 
 const obj = {a: 1, b: [2, 3]};
-for (let {value}  of deepIterator(obj)) {
+for (let {value} of deepIterator(obj)) {
   console.log(value);
 }
 /* outputs:
@@ -37,7 +37,7 @@ for (let {value}  of deepIterator(obj)) {
 
 const deepArray = [[1, 2], [3, 4]];
 const it = deepIterator(deepArray, {onlyLeaves: true});
-for (let {parent, key}  of it) {
+for (let {parent, key} of it) {
   parent[key]++;
 }
 // deepArray ===  [[2, 3], [4, 5]]
