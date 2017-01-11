@@ -55,8 +55,10 @@ Note that :
 - parent[key] lets you update the current node
 - key is undefined if the node is the root or the iterated collection is a generic iterable
 - path is lazy evaluated : not using it will improve performance, i. e. :
- for (let {value, parent, key} of it) => path is not evaluated
- for (let {value, parent, key, path} of it) => path is evaluated
+```js
+for (let {value, parent, key} of it) => path is not evaluated
+for (let {value, parent, key, path} of it) => path is evaluated
+```
 
 ## Options
 
@@ -99,11 +101,12 @@ Handles the circular references detection :
 Enables iteration over non-iterable objects or not.
 
 ### `skipIteration`
-*accepted values*: callback: node => true or false
+*accepted values*: callback: node => boolean
 
 Specifies when to iterate or not.
-if the callback returns true : the node is not iterated itself and is considered as a leaf
-if the callback returns false : the node is deeply iterated
+- if the callback returns true : the node is not iterated itself and is considered as a leaf
+- if the callback returns false : the node is deeply iterated
+
 Example : Skip iteration of all arrays :
 ```js
 const it = deepIterator(obj, {skipIteration: node => Array.isArray(node.value)});
