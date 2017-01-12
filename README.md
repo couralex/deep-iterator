@@ -45,16 +45,39 @@ for (let {parent, key} of it) {
 
 ## The node object
 
-For each iteration, deep-iterator yields a node object containing the following properties :
-- value: the value of the node
-- parent: the parent of the node
-- key: the key of the node in its parent
-- path: an array containing all the keys from the root down to the node
+For each iteration, deep-iterator yields a node object containing the following members :
+- `value`: the value of the node
+- `parent`: the parent of the node
+- `key`: the key of the node in its parent
+- `path`: an array containing all the keys from the root down to the node
+- `parentNode`: the parent node object
+- `isCircular()`: true if the node is a circular reference
+- `isLeaf()`: true if the node is a leaf
+- `type`: a string representing the type of the node. Possible values are:
+  - `Null`,
+  - `Undefined`,
+  - `Boolean`,
+  - `String`,
+  - `Symbol`,
+  - `Date`,
+  - `RegExp`,
+  - `Function`,
+  - `GeneratorFunction`,
+  - `Promise`,
+  - `Array`,
+  - `Set`,
+  - `Map`,
+  - `UserDefinedIterable`: an iterable that is not an array, map, set or string,
+  - `NonIterableObject`: an object that doesn't implement the iterator protocol
 
-Note that :
+Additionally, the node object contains helpers methods to determine its type, in the form of
+"isType()".  
+Examples : `isMap()`, `isNonIterableObject()`, ...
+
+Remarks on the node object :
 - parent[key] lets you update the current node
-- key is undefined if the node is the root or the iterated collection is a generic iterable
-- path is lazy evaluated : not using it will improve performance, i. e. :
+- key is undefined if the node is the root or the iterated collection is a user defined iterable
+- path and type are lazy evaluated : not using them will improve performance, i. e. :
 ```js
 for (let {value, parent, key} of it) => path is not evaluated
 for (let {value, parent, key, path} of it) => path is evaluated
@@ -103,9 +126,11 @@ Enables iteration over non-iterable objects or not.
 ### `skipIteration`
 *accepted values*: callback: node => boolean
 
-Specifies when to iterate or not.
+Specifies whether a recursive iteration is performed on the node or not.
 - if the callback returns true : the node is not iterated itself and is considered as a leaf
 - if the callback returns false : the node is deeply iterated
+
+Note: skipIteration is not called on leaves.
 
 Example : Skip iteration of all arrays :
 ```js
