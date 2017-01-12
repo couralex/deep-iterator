@@ -68,26 +68,101 @@ describe('deepIterator', function() {
         testee.push(testee);
         const result = deepIteratorResultValues(testee);
         const expected = [testee, 1, testee];
-        expect(result).to .deep.equal(expected);
+        expect(result).to.deep.equal(expected);
+      });
+      it('should throw if createIterator is called on a leaf', function () {
+        const testee = [1];
+        const callback = () => {
+          for (let node of deepIterator(testee)) {
+            const it = node.createIterator();
+          }
+        };
+        expect(callback).to.throw();
       });
     });
     describe('node', function () {
-      it('should have a key', function () {
+      it('should have a correct key', function () {
         const testee = {a: 1, b: 2};
         const result = deepIteratorResult(testee).map(element => element.key);
         const expected = [undefined, 'a', 'b'];
         expect(result).to.deep.equal(expected);
       });
-      it('should have a parent', function () {
+      it('should have a correct parent', function () {
         const testee = {a: {b: 2}};
         const result = deepIteratorResult(testee).map(element => element.parent);
         const expected = [undefined, testee, {b: 2}];
         expect(result).to.deep.equal(expected);
       });
-      it('should have a path', function () {
+      it('should have a correct path', function () {
         const testee = {a: {b: 2}};
         const result = deepIteratorResult(testee).map(element => element.path);
         const expected = [[], ['a'], ['a', 'b']];
+        expect(result).to.deep.equal(expected);
+      });
+      it('should have a correct type', function () {
+        const testee = {a: [1]};
+        const result = deepIteratorResult(testee).map(element => element.type);
+        const expected = ['NonIterableObject', 'Array', 'Number'];
+        expect(result).to.deep.equal(expected);
+      });
+      it('should have a correct isCircular method', function () {
+        const testee = [1];
+        testee.push(testee);
+        const result = deepIteratorResult(testee).map(element => element.isCircular());
+        const expected = [false, false, true];
+        expect(result).to.deep.equal(expected);
+      });
+      it('should have a correct isLeaf method', function () {
+        const testee = [1];
+        const result = deepIteratorResult(testee).map(element => element.isLeaf());
+        const expected = [false, true];
+        expect(result).to.deep.equal(expected);
+      });
+      const types = [
+        ['Null', null],
+        ['Undefined', undefined],
+        ['Boolean', true],
+        ['Number', 1],
+        ['String', 'a'], // strings are excluded although they are iterable
+        ['Symbol', Symbol('foo')],
+        ['Date', new Date(1995, 10)],
+        ['RegExp', /a/],
+        ['Function', () => {}],
+        ['GeneratorFunction', function*() {}],
+        ['Promise', new Promise(() => {})],
+        ['Array', []],
+        ['Set', new Set()],
+        ['Map', new Map()],
+        ['UserDefinedIterable', {[Symbol.iterator]: function*() {}}],
+        ['NonIterableObject', {}]
+      ];
+      types.forEach(([type, value]) => {
+        const method = `is${type}`;
+        it(`should have a correct ${method} method`, function () {
+          const testee = value;
+          const result = deepIterator(testee).next().value[method]();
+          const expected = true;
+          expect(result).to.deep.equal(expected);
+        });
+      });
+    });
+    describe('root', function () {
+      it('should have an undefined key', function () {
+        const testee = 1;
+        const result = deepIterator(testee).next().value.key;
+        const expected = undefined;
+        expect(result).to.deep.equal(expected);
+      });
+      it('should have an undefined parent', function () {
+        const testee = 1;
+        const result = deepIterator(testee).next().value.parent;
+        const expected = undefined;
+        expect(result).to.deep.equal(expected);
+      });
+      it('should have an undefined parentNode', function () {
+        const testee = 1;
+        const result = deepIterator(testee).next().value.parentNode;
+        const expected = undefined;
         expect(result).to.deep.equal(expected);
       });
     });
@@ -200,14 +275,14 @@ describe('deepIterator', function() {
     });
   });
   describe("options: {search: 'bfs', circularReference: 'throw'}", function() {
-    it('should use DFS post order algorithm and iterate only leaves', function () {
+    it('should use BFS algorithm and iterate only leaves', function () {
       const testee = [1, 2];
       testee.push(testee);
       expect(() => {deepIteratorResultValues(testee, {search: 'bfs', circularReference: 'throw'})}).to.throw();
     });
   });
   describe("options: {search: 'bfs', circularReference: 'noCheck'}", function() {
-    it('should use DFS post order algorithm and iterate only leaves', function () {
+    it('should use BFS algorithm and iterate only leaves', function () {
       const testee = [1, 2];
       testee.push(testee);
       const func = () => {

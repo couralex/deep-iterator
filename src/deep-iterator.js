@@ -1,6 +1,5 @@
 import * as search from './search';
-import {getNode} from './node';
-import makeSelectGenerator from './select-generator';
+import RootNode from './root-node';
 import makeSeen from './seen';
 
 export default function* deepIterator(rootElement, options = {}) {
@@ -30,7 +29,7 @@ export default function* deepIterator(rootElement, options = {}) {
     }
     config.search = options.search;
   }
-  const node = getNode(rootElement, undefined, undefined, []);
+  const node = new RootNode(rootElement, config);
   const seen = makeSeen(config.circularReference);
-  yield* search[config.search](node, makeSelectGenerator(config), config.onlyLeaves, seen);
+  yield* search[config.search](node, config.onlyLeaves, seen);
 }

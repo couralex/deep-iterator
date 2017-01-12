@@ -11,6 +11,7 @@ export function* arrayIterator(arr) {
 }
 
 // transpiled generator has uncovered branches
+// istanbul issue #645
 /* istanbul ignore next */
 export function* genericIterator(iterator) {
   for (let value of iterator) {
@@ -19,9 +20,12 @@ export function* genericIterator(iterator) {
 }
 
 // transpiled generator has uncovered branches
+// istanbul issue #645
 /* istanbul ignore next */
 export function* mapIterator(iterator) {
   for (let element of iterator) {
     yield element;
   }
 }
+
+export const LEAF = null;

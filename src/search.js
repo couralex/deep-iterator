@@ -1,39 +1,34 @@
-import {getDeeperNode} from './node';
-import isLeaf from './is-leaf';
+import Node from './node';
 
-export function* dfsPreOrder(node, selectIterator, onlyLeaves, seen) {
-  const iterator = selectIterator(node);
-  // if it's a leaf (i. e. a non-iterable node) or a circular reference
-  if (isLeaf(node, iterator, seen)) {
+export function* dfsPreOrder(node, onlyLeaves, parentSeen) {
+  if (node.isLeaf()) {
     yield node;
     return;
   }
   if (!onlyLeaves) {
     yield node;
   }
-  for (let child of iterator(node.value)) {
+  const seen = parentSeen.add(node.value);
+  for (let [key, value] of node.createIterator()) {
     yield* dfsPreOrder(
-      getDeeperNode(child, node),
-      selectIterator,
+      new Node(key, value, node, seen.has(value)),
       onlyLeaves,
-      seen.add(node.value)
+      seen
     );
   }
 }
 
-export function* dfsPostOrder(node, selectIterator, onlyLeaves, seen) {
-  const iterator = selectIterator(node);
-  // if it's a leaf (i. e. a non-iterable node) or a circular reference
-  if (isLeaf(node, iterator, seen)) {
+export function* dfsPostOrder(node, onlyLeaves, parentSeen) {
+  if (node.isLeaf()) {
     yield node;
     return;
   }
-  for (let child of iterator(node.value)) {
+  const seen = parentSeen.add(node.value);
+  for (let [key, value] of node.createIterator()) {
     yield* dfsPostOrder(
-      getDeeperNode(child, node),
-      selectIterator,
+      new Node(key, value, node, seen.has(value)),
       onlyLeaves,
-      seen.add(node.value)
+      seen
     );
   }
   if (!onlyLeaves) {
@@ -42,22 +37,23 @@ export function* dfsPostOrder(node, selectIterator, onlyLeaves, seen) {
 }
 
 // transpiled generator has uncovered branches
+// istanbul issue #645
 /* istanbul ignore next */
-export function* bfs(rootNode, selectIterator, onlyLeaves, seen) {
-  const queue = [{node: rootNode, seen}];
+export function* bfs(rootNode, onlyLeaves, parentSeen) {
+  const queue = [{node: rootNode, seen: parentSeen}];
   for (let i = 0; i < queue.length; i++) {
     const node = queue[i].node;
-    const iterator = selectIterator(node);
-    if (isLeaf(node, iterator, queue[i].seen)) {
+    if (node.isLeaf()) {
       yield node;
     } else {
       if (!onlyLeaves) {
         yield node;
       }
-      for (let child of iterator(node.value)) {
+      const seen = queue[i].seen.add(node.value);
+      for (let [key, value] of node.createIterator()) {
         queue.push({
-          node: getDeeperNode(child, node),
-          seen: seen.add(node.value)
+          node: new Node(key, value, node, seen.has(value)),
+          seen
         });
       }
     }
