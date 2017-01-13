@@ -199,7 +199,7 @@ describe('deepIterator', function() {
     });
   });
   describe("options: {circularReference: 'noCheck'}", function() {
-    it('should throw if there is a circular reference', function () {
+    it('should skip circular reference detection', function () {
       const testee = [1, 2];
       testee.push(testee);
       const func = () => {
@@ -238,14 +238,14 @@ describe('deepIterator', function() {
     });
   });
   describe("options: {search: 'dfsPostOrder', circularReference: 'throw'}", function() {
-    it('should use DFS post order algorithm and iterate only leaves', function () {
+    it('should use DFS post order algorithm and throw on a circular reference', function () {
       const testee = [1, 2];
       testee.push(testee);
       expect(() => {deepIteratorResultValues(testee, {search: 'dfsPostOrder', circularReference: 'throw'})}).to.throw();
     });
   });
   describe("options: {search: 'dfsPostOrder', circularReference: 'noCheck'}", function() {
-    it('should use DFS post order algorithm and iterate only leaves', function () {
+    it('should use DFS post order algorithm and skip circular refenrence detection', function () {
       const testee = [1, 2];
       testee.push(testee);
       const func = () => {
@@ -275,14 +275,14 @@ describe('deepIterator', function() {
     });
   });
   describe("options: {search: 'bfs', circularReference: 'throw'}", function() {
-    it('should use BFS algorithm and iterate only leaves', function () {
+    it('should use BFS algorithm and throw on a circular reference', function () {
       const testee = [1, 2];
       testee.push(testee);
       expect(() => {deepIteratorResultValues(testee, {search: 'bfs', circularReference: 'throw'})}).to.throw();
     });
   });
   describe("options: {search: 'bfs', circularReference: 'noCheck'}", function() {
-    it('should use BFS algorithm and iterate only leaves', function () {
+    it('should use BFS algorithm and skip circular refenrence detection', function () {
       const testee = [1, 2];
       testee.push(testee);
       const func = () => {
