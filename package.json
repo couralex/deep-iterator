@@ -13,6 +13,8 @@
     "commit": "git-cz",
     "commita": "git add . && git status -s && git-cz",
     "lint": "eslint src test",
+    "cover": "nyc npm run test",
+    "coveralls": "nyc --reporter=text-lcov npm run test | coveralls",
     "test": "mocha \"test/{unit,integration}/**/*.test.js\""
   },
   "repository": {
@@ -44,15 +46,18 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
-    "@babel/register": "^7.15.3",
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
+    "@babel/register": "^7.15.3",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
     "chai": "^4.3.4",
     "commitizen": "^4.2.4",
+    "coveralls": "^3.1.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.32.0",
     "mocha": "^9.1.1",
     "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^15.1.0",
     "rimraf": "^3.0.2"
   },
   "dependencies": {
