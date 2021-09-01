@@ -1,6 +1,6 @@
 {
   "name": "deep-iterator",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Deep iteration of any object or iterable collection.",
   "main": "./lib/deep-iterator.js",
   "jsnext:main": "src/index.js",
@@ -13,8 +13,6 @@
     "commit": "git-cz",
     "commita": "git add . && git status -s && git-cz",
     "lint": "eslint src test",
-    "cover": "babel-node $(npm bin)/isparta cover _mocha -- \"test/{unit,integration}/**/*.test.js\"",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "test": "mocha \"test/{unit,integration}/**/*.test.js\""
   },
   "repository": {
@@ -45,20 +43,19 @@
     }
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.18.0",
-    "chai": "^3.5.0",
-    "commitizen": "^2.9.5",
-    "coveralls": "^2.11.15",
-    "cz-conventional-changelog": "^1.2.0",
-    "eslint": "^3.13.0",
-    "isparta": "^4.0.0",
-    "mocha": "^3.2.0",
-    "mocha-lcov-reporter": "^1.2.0",
-    "rimraf": "^2.5.4"
+    "@babel/cli": "^7.14.8",
+    "@babel/register": "^7.15.3",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "chai": "^4.3.4",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.32.0",
+    "mocha": "^9.1.1",
+    "mocha-lcov-reporter": "^1.3.0",
+    "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "babel-runtime": "^6.20.0"
+    "@babel/runtime": "^7.15.3"
   }
 }
