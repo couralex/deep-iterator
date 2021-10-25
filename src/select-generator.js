@@ -1,5 +1,4 @@
-import {getTagMap} from './tag';
-import {LEAF} from './generators';
+import {getTagMap} from './tag.js';
 
 export default class SelectGenerator {
   constructor(config) {
