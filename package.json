@@ -1,20 +1,12 @@
 {
-  "name": "deep-iterator",
-  "version": "1.1.1",
-  "description": "Deep iteration of any object or iterable collection.",
-  "main": "./lib/deep-iterator.js",
-  "jsnext:main": "src/index.js",
-  "module": "es/index.js",
+  "name": "@msamblanet/deep-iterator",
+  "version": "1.1.3",
+  "description": "Deep iteration of any object or iterable collection. (This version revised by @msablanet)",
+  "type": "module",
+  "main": "src/deep-iterator.js",
+  "types": "src/index.d.ts",
   "scripts": {
-    "clean": "rimraf lib",
-    "transpile": "babel --source-maps inline src --out-dir lib",
-    "build": "npm run clean && npm run transpile",
-    "prepublish": "npm run build",
-    "commit": "git-cz",
-    "commita": "git add . && git status -s && git-cz",
     "lint": "eslint src test",
-    "cover": "nyc npm run test",
-    "coveralls": "nyc --reporter=text-lcov npm run test | coveralls",
     "test": "mocha \"test/{unit,integration}/**/*.test.js\""
   },
   "repository": {
@@ -39,28 +31,9 @@
     "url": "https://github.com/couralex/deep-iterator/issues"
   },
   "homepage": "https://github.com/couralex/deep-iterator#readme",
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/plugin-transform-runtime": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "@babel/register": "^7.15.3",
-    "@istanbuljs/nyc-config-babel": "^3.0.0",
     "chai": "^4.3.4",
-    "commitizen": "^4.2.4",
-    "coveralls": "^3.1.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^7.32.0",
-    "mocha": "^9.1.1",
-    "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^15.1.0",
-    "rimraf": "^3.0.2"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.15.3"
+    "eslint": "^8.1.0",
+    "mocha": "^9.1.3"
   }
 }

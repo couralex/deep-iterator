@@ -1,5 +1,5 @@
-import Node from './node';
-import SelectGenerator from './select-generator';
+import Node from './node.js';
+import SelectGenerator from './select-generator.js';
 
 export default class RootNode extends Node {
   constructor(value, config) {
