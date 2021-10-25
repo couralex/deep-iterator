@@ -1,9 +1,9 @@
 {
   "name": "@msamblanet/deep-iterator",
-  "version": "1.1.2",
-  "description": "Deep iteration of any object or iterable collection.",
+  "version": "1.1.3",
+  "description": "Deep iteration of any object or iterable collection. (This version revised by @msablanet)",
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/deep-iterator.js",
   "types": "src/index.d.ts",
   "scripts": {
     "lint": "eslint src test",
@@ -31,15 +31,9 @@
     "url": "https://github.com/couralex/deep-iterator/issues"
   },
   "homepage": "https://github.com/couralex/deep-iterator#readme",
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
   "devDependencies": {
     "chai": "^4.3.4",
-    "eslint": "^7.32.0",
-    "mocha": "^9.1.1",
-    "mocha-lcov-reporter": "^1.3.0"
+    "eslint": "^8.1.0",
+    "mocha": "^9.1.3"
   }
 }
