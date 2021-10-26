@@ -1,6 +1,6 @@
 {
   "name": "@msamblanet/deep-iterator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Deep iteration of any object or iterable collection. (This version revised by @msablanet)",
   "type": "module",
   "main": "src/deep-iterator.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/couralex/deep-iterator.git"
+    "url": "git+https://github.com/msamblanet/deep-iterator.git"
   },
   "keywords": [
     "iterator",
@@ -25,12 +25,12 @@
     "bfs",
     "object"
   ],
-  "author": "couralex <couralex@courpron.net>",
+  "author": "couralex <couralex@courpron.net>, Michael Samblanet <michael@samblanet.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/couralex/deep-iterator/issues"
+    "url": "https://github.com/msamblanet/deep-iterator/issues"
   },
-  "homepage": "https://github.com/couralex/deep-iterator#readme",
+  "homepage": "https://github.com/msamblanet/deep-iterator#readme",
   "devDependencies": {
     "chai": "^4.3.4",
     "eslint": "^8.1.0",
