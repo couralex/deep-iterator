@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import deepIterator from '../../src/deep-iterator';
+import deepIterator from '../../src/deep-iterator.js';
 
 function deepIteratorResult(testee, options) {
   return [...deepIterator(testee, options)];
@@ -74,7 +74,7 @@ describe('deepIterator', function() {
         const testee = [1];
         const callback = () => {
           for (let node of deepIterator(testee)) {
-            const it = node.createIterator();
+            node.createIterator();
           }
         };
         expect(callback).to.throw();

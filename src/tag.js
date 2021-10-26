@@ -1,4 +1,4 @@
-import * as gen from './generators';
+import * as gen from './generators.js';
 
 const TYPE_POSITION_IN_TAG = 8;
 

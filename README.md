@@ -1,7 +1,8 @@
 # deep-iterator
-[![Build Status](https://travis-ci.org/couralex/deep-iterator.svg?branch=master)](https://travis-ci.org/couralex/deep-iterator)
-[![Coverage Status](https://coveralls.io/repos/github/couralex/deep-iterator/badge.svg?branch=master)](https://coveralls.io/github/couralex/deep-iterator?branch=master)
+[![npm version](https://badge.fury.io/js/@msamblanet%2Fdeep-iterator.svg)](https://badge.fury.io/js/@msamblanet%2Fdeep-iterator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+**NOTE:** This is not the original branch for deep-iterator.  This is a modified branch maintained by @msamblanet to incoroprate typescript definitions, convert into an ESM module, and bring dependencies up to date.
 
 deep-iterator iterates recursively through objects, arrays, sets, maps, generic iterables, or any mix of them.
 

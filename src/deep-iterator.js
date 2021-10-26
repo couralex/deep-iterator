@@ -1,6 +1,6 @@
-import * as search from './search';
-import RootNode from './root-node';
-import makeSeen from './seen';
+import * as search from './search.js';
+import RootNode from './root-node.js';
+import makeSeen from './seen.js';
 
 export default function* deepIterator(rootElement, options = {}) {
   const config = {

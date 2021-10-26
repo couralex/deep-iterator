@@ -1,5 +1,5 @@
-import {LEAF} from './generators';
-import {getTag, getTypeFromTag} from './tag';
+import {LEAF} from './generators.js';
+import {getTag, getTypeFromTag} from './tag.js';
 
 
 export default class Node {
