@@ -1,4 +1,5 @@
 # deep-iterator
+[![npm version](https://badge.fury.io/js/@msamblanet%2Fdeep-iterator.svg)](https://badge.fury.io/js/@msamblanet%2Fdeep-iterator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **NOTE:** This is not the original branch for deep-iterator.  This is a modified branch maintained by @msamblanet to incoroprate typescript definitions, convert into an ESM module, and bring dependencies up to date.
